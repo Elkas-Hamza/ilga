@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabinet Comptable ILGA - Expert-comptable à votre service</title>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background: #34495e;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #3498db;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-alt {
+            background: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        h3 {
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .contact-item i {
+            color: #3498db;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: #3498db;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 0.5rem 0;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; border: 2px dashed #fff; min-width: 150px; text-align: center;">
+                    <p style="color: #fff; font-weight: bold; margin: 0;">🏢 LOGO ILGA ICI</p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="logo">Cabinet ILGA</div>
+                    <div class="tagline">Expert-comptable • Conseil fiscal • Gestion d'entreprise</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="apropos" class="section-alt">
+        <div class="container">
+            <h2>À propos du Cabinet ILGA</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Votre partenaire comptable de confiance</h3>
+                    <p>Depuis plus de 15 ans, le Cabinet ILGA accompagne les entreprises et les particuliers dans la gestion de leurs obligations comptables et fiscales. Notre équipe d'experts-comptables diplômés met son savoir-faire au service de votre réussite.</p>
+                    
+                    <p>Nous nous engagons à vous fournir des conseils personnalisés et des solutions adaptées à vos besoins spécifiques, que vous soyez entrepreneur, PME, ou particulier.</p>
+                    
+                    <div class="highlight-box">
+                        <h3>Notre engagement</h3>
+                        <p>Proximité • Professionnalisme • Réactivité</p>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div style="background: #ecf0f1; padding: 4rem; border-radius: 10px; color: #7f8c8d;">
+                        <div style="background: #fff; padding: 2rem; border-radius: 8px; margin-bottom: 1rem; display: flex; justify-content: center; align-items: center;">
+                            <img src="logo-opca.png" alt="OPCA - Organisation Professionnelle des Comptables Agréés" style="max-width: 200px; max-height: 100px; object-fit: contain;">
+                        </div>
+                        <i style="font-size: 4rem;">📊</i>
+                        <p>Expert-comptable diplômé<br>Membre de l'OPCA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2>Nos Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Comptabilité Générale</h3>
+                    <p>Tenue complète de votre comptabilité, établissement des comptes annuels, déclarations fiscales et sociales.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <h3>Conseil Fiscal</h3>
+                    <p>Optimisation fiscale, accompagnement lors de contrôles, conseil en matière de TVA et impôts sur les sociétés.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3>Gestion d'Entreprise</h3>
+                    <p>Analyse financière, tableaux de bord, conseil en gestion, accompagnement dans vos décisions stratégiques.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Création d'Entreprise</h3>
+                    <p>Accompagnement complet dans la création de votre entreprise, choix du statut juridique, formalités administratives.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Paie et Social</h3>
+                    <p>Établissement des bulletins de paie, déclarations sociales, conseil en droit du travail et charges sociales.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Audit et Révision</h3>
+                    <p>Missions d'audit, révision comptable, expertise judiciaire, évaluation d'entreprise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-alt">
+        <div class="container">
+            <h2>Contactez-nous</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Informations de contact</h3>
+                    <div class="contact-item">
+                        <i>📍</i>
+                        <div>
+                            <strong>Adresse :</strong><br>
+                            123 Avenue de la République<br>
+                            75011 Paris, France
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📞</i>
+                        <div>
+                            <strong>GSM Fixe :</strong><br>
+                            05 22 07 17 17
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📱</i>
+                        <div>
+                            <strong>GSM :</strong><br>
+                            06 62 03 99 00
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📧</i>
+                        <div>
+                            <strong>Email :</strong><br>
+                            marocilga@gmail.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>🕒</i>
+                        <div>
+                            <strong>Horaires :</strong><br>
+                            Lundi - Vendredi : 9h00 - 18h00<br>
+                            Samedi : 9h00 - 12h00
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Demande de contact</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="nom">Nom complet</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Téléphone</label>
+                            <input type="tel" id="telephone" name="telephone">
+                        </div>
+                        <div class="form-group">
+                            <label for="sujet">Sujet</label>
+                            <input type="text" id="sujet" name="sujet" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Décrivez votre demande..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <div style="margin-top: 3rem;">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">Notre localisation</h3>
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3756.397918408675!2d-7.488045588300658!3d33.58887217322371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cb007890addf%3A0xc9a4854f0afd8feb!2sCabinet%20ILGA!5e1!3m2!1sfr!2sma!4v1754531071861!5m2!1sfr!2sma" 
+                            width="100%" 
+                            height="400" 
+                            style="border:0; border-radius: 8px; max-width: 100%;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Cabinet ILGA - Expert-comptable. Tous droits réservés.</p>
+            <p>Inscrit à l'Ordre des Experts-Comptables</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("z2fMahj9M6XxdrdOu"); // Replace with your actual public key from EmailJS
+        })();
+
+        // Enhanced form validation and functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    nom: document.getElementById('nom').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    telephone: document.getElementById('telephone').value.trim(),
+                    sujet: document.getElementById('sujet').value.trim(),
+                    message: document.getElementById('message').value.trim()
+                };
+                
+                // Validate required fields
+                if (!formData.nom || !formData.email || !formData.sujet || !formData.message) {
+                    alert('Veuillez remplir tous les champs obligatoires.');
+                    return;
+                }
+                
+                // Validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(formData.email)) {
+                    alert('Veuillez entrer une adresse email valide.');
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = form.querySelector('.btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Envoi en cours...';
+                submitBtn.disabled = true;
+                
+                // Send email using EmailJS
+                const templateParams = {
+                    from_name: formData.nom,
+                    from_email: formData.email,
+                    phone: formData.telephone,
+                    subject: formData.sujet,
+                    message: formData.message,
+                    to_email: 'elkasmihamza44@gmail.com'
+                };
+                
+                emailjs.send("service_ifli24q","template_7xxazci", templateParams)
+                    .then(function(response) {
+                        console.log('SUCCESS!', response.status, response.text);
+                        
+                        // Show success modal
+                        showSuccessModal();
+                        
+                        // Reset form
+                        form.reset();
+                        
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                        
+                        // Show fallback modal with copy option
+                        showFallbackModal(formData);
+                    })
+                    .finally(function() {
+                        // Reset button
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    });
+            });
+            
+            function showSuccessModal() {
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.8); z-index: 1000; display: flex;
+                    justify-content: center; align-items: center;
+                `;
+                
+                const modalContent = document.createElement('div');
+                modalContent.style.cssText = `
+                    background: white; padding: 3rem; border-radius: 10px;
+                    max-width: 400px; width: 90%; text-align: center;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                `;
+                
+                modalContent.innerHTML = `
+                    <div style="color: #27ae60; font-size: 4rem; margin-bottom: 1rem;">✅</div>
+                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">Message envoyé avec succès!</h3>
+                    <p style="color: #7f8c8d; margin-bottom: 2rem;">
+                        Votre demande a été envoyée à Cabinet ILGA. 
+                        Nous vous contacterons dans les plus brefs délais.
+                    </p>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        background: #27ae60; color: white; padding: 1rem 2rem;
+                        border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;
+                    ">Parfait!</button>
+                `;
+                
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+                
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    if (document.body.contains(modal)) {
+                        document.body.removeChild(modal);
+                    }
+                }, 5000);
+            }
+            
+            function showFallbackModal(formData) {
+                const emailContent = 
+                    `À: elkasmihamza44@gmail.com\n` +
+                    `Sujet: Contact Cabinet ILGA - ${formData.sujet}\n\n` +
+                    `Nom: ${formData.nom}\n` +
+                    `Email: ${formData.email}\n` +
+                    `Téléphone: ${formData.telephone}\n\n` +
+                    `Message:\n${formData.message}`;
+                
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.8); z-index: 1000; display: flex;
+                    justify-content: center; align-items: center;
+                `;
+                
+                const modalContent = document.createElement('div');
+                modalContent.style.cssText = `
+                    background: white; padding: 2rem; border-radius: 10px;
+                    max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                `;
+                
+                modalContent.innerHTML = `
+                    <h3 style="color: #e74c3c; margin-bottom: 1rem; text-align: center;">
+                        ⚠️ Problème d'envoi
+                    </h3>
+                    <p style="margin-bottom: 1rem; text-align: center; color: #7f8c8d;">
+                        L'envoi automatique a échoué. Copiez ces informations et envoyez-les manuellement:
+                    </p>
+                    <textarea readonly style="
+                        width: 100%; height: 200px; padding: 1rem; border: 1px solid #ddd;
+                        border-radius: 5px; font-family: monospace; font-size: 0.9rem;
+                        background: #f8f9fa; resize: none;
+                    ">${emailContent}</textarea>
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <button id="copyBtn" style="
+                            background: #3498db; color: white; padding: 0.8rem 1.5rem;
+                            border: none; border-radius: 5px; cursor: pointer; margin-right: 1rem;
+                            font-size: 1rem;
+                        ">📋 Copier</button>
+                        <button id="closeBtn" style="
+                            background: #95a5a6; color: white; padding: 0.8rem 1.5rem;
+                            border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;
+                        ">Fermer</button>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.8rem; color: #7f8c8d; text-align: center;">
+                        💡 Après avoir copié, ouvrez votre client email et collez ces informations
+                    </p>
+                `;
+                
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+                
+                // Copy button functionality
+                const copyBtn = modalContent.querySelector('#copyBtn');
+                const textarea = modalContent.querySelector('textarea');
+                
+                copyBtn.addEventListener('click', () => {
+                    textarea.select();
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(emailContent).then(() => {
+                            copyBtn.innerHTML = '✅ Copié!';
+                            copyBtn.style.background = '#27ae60';
+                            setTimeout(() => {
+                                copyBtn.innerHTML = '📋 Copier';
+                                copyBtn.style.background = '#3498db';
+                            }, 2000);
+                        });
+                    } else {
+                        document.execCommand('copy');
+                        copyBtn.innerHTML = '✅ Copié!';
+                        copyBtn.style.background = '#27ae60';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '📋 Copier';
+                            copyBtn.style.background = '#3498db';
+                        }, 2000);
+                    }
+                });
+                
+                // Close button functionality
+                const closeBtn = modalContent.querySelector('#closeBtn');
+                closeBtn.addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                });
+                
+                // Close on outside click
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        document.body.removeChild(modal);
+                    }
+                });
+            }
+
+            // Add real-time validation
+            const emailInput = document.getElementById('email');
+            emailInput.addEventListener('blur', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (this.value && !emailRegex.test(this.value)) {
+                    this.style.borderColor = '#e74c3c';
+                    this.style.backgroundColor = '#fdf2f2';
+                } else {
+                    this.style.borderColor = '#ddd';
+                    this.style.backgroundColor = 'white';
+                }
+            });
+            
+            // Add character counter for message
+            const messageTextarea = document.getElementById('message');
+            const charCounter = document.createElement('div');
+            charCounter.style.textAlign = 'right';
+            charCounter.style.fontSize = '0.8rem';
+            charCounter.style.color = '#7f8c8d';
+            charCounter.style.marginTop = '0.5rem';
+            messageTextarea.parentNode.appendChild(charCounter);
+            
+            messageTextarea.addEventListener('input', function() {
+                const length = this.value.length;
+                charCounter.textContent = `${length}/500 caractères`;
+                if (length > 500) {
+                    this.style.borderColor = '#e74c3c';
+                    charCounter.style.color = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#ddd';
+                    charCounter.style.color = '#7f8c8d';
+                }
+            });
+
+            // Add active state to navigation
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.style.background = '');
+                    this.style.background = '#3498db';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

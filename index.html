@@ -28,21 +28,60 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            color: white;
+            background: #faf8f5;
+            color: #2c3e50;
             padding: 2rem 0;
-            text-align: center;
+            border-bottom: 3px solid #3498db;
         }
 
         .logo {
             font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
+            color: #2c3e50;
         }
 
         .tagline {
             font-size: 1.2rem;
-            opacity: 0.9;
+            opacity: 0.8;
+            color: #34495e;
+        }
+
+        .header-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-left, .header-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-center {
+            text-align: center;
+        }
+
+        .arabic-services {
+            font-size: 1.4rem;
+            color: #27ae60;
+            margin-top: 1rem;
+            line-height: 1.6;
+            direction: rtl;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .header-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
         }
 
         /* Navigation */
@@ -119,6 +158,43 @@
             max-width: 100%;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Photo placeholder styles */
+        .photo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .photo-placeholder {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+            border: 4px solid #fff;
+        }
+
+        .photo-placeholder i {
+            font-size: 4rem;
+            color: #fff;
+        }
+
+        .name-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .professional-title {
+            font-size: 1.1rem;
+            color: #3498db;
+            font-style: italic;
         }
 
         /* Services */
@@ -279,13 +355,23 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; border: 2px dashed #fff; min-width: 150px; text-align: center;">
-                    <p style="color: #fff; font-weight: bold; margin: 0;">🏢 LOGO ILGA ICI</p>
+            <div class="header-layout">
+                <!-- Left: OPCA Logo -->
+                <div class="header-left">
+                    <img src="logo-opca.png" alt="OPCA - Organisation Professionnelle des Comptables Agréés" style="max-width: 280px; max-height: 200px; object-fit: contain;">
                 </div>
-                <div style="text-align: center;">
-                    <div class="logo">Cabinet ILGA</div>
-                    <div class="tagline">Expert-comptable • Conseil fiscal • Gestion d'entreprise</div>
+                
+                <!-- Center: Main Content -->
+                <div class="header-center">
+                    <img src="Cabinet comptable Agréé.png" alt="Cabinet comptable Agréé" style="max-width: 500px; max-height: 160px; object-fit: contain; margin-bottom: 1rem;">
+                    <div class="arabic-services">
+                        اعمال المحاسبة،الاستشارة القانونية، و الجبائية، انشاء الشركات،المنازعات و التحصيل، التكوين
+                    </div>
+                </div>
+                
+                <!-- Right: ILGA Logo -->
+                <div class="header-right">
+                    <img src="logo-ilga.png" alt="Cabinet ILGA Logo" style="max-width: 250px; max-height: 200px; object-fit: contain;">
                 </div>
             </div>
         </div>
@@ -320,12 +406,27 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <div style="background: #ecf0f1; padding: 4rem; border-radius: 10px; color: #7f8c8d;">
-                        <div style="background: #fff; padding: 2rem; border-radius: 8px; margin-bottom: 1rem; display: flex; justify-content: center; align-items: center;">
-                            <img src="logo-opca.png" alt="OPCA - Organisation Professionnelle des Comptables Agréés" style="max-width: 200px; max-height: 100px; object-fit: contain;">
+                    <!-- Side by side layout for photo and OPCA -->
+                    <div style="display: flex; gap: 2rem; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;">
+                        <!-- Photo placeholder for your photo -->
+                        <div class="photo-container" style="flex: 1; min-width: 250px;">
+                            <div class="photo-placeholder">
+                                
+                            </div>
+                            <div class="name-title">EL KASMI abdeljalil</div>
+                            <div class="professional-title">Expert-Comptable Diplômé</div>
                         </div>
-                        <i style="font-size: 4rem;">📊</i>
-                        <p>Expert-comptable diplômé<br>Membre de l'OPCA</p>
+                        
+                        <!-- OPCA Section -->
+                        <div style="background: #ecf0f1; padding: 2rem; border-radius: 10px; color: #7f8c8d; flex: 1; min-width: 250px;">
+                            <div style="background: #fff; padding: 2rem; border-radius: 8px; margin-bottom: 1rem; display: flex; justify-content: center; align-items: center;">
+                                <img src="logo-opca.png" alt="OPCA - Organisation Professionnelle des Comptables Agréés" style="max-width: 200px; max-height: 100px; object-fit: contain;">
+                            </div>
+                            <div style="text-align: center;">
+                                <i style="font-size: 2rem;">📊</i>
+                                <p>Membre de l'OPCA</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

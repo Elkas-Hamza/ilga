@@ -399,12 +399,11 @@ header {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .map-wrapper:hover {
-    transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
@@ -418,7 +417,44 @@ header {
     border: 0;
     border-radius: 8px;
     max-width: 100%;
-    pointer-events: none;
+    display: block;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 86, 179, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.map-overlay:hover {
+    opacity: 1;
+}
+
+.map-click-text {
+    background: rgba(0, 86, 179, 0.9);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.map-click-text i {
+    font-size: 16px;
 }
 
 @media (max-width: 768px) {
@@ -464,5 +500,27 @@ header {
     .header-center {
         text-align: center;
         flex: 1;
+    }
+
+    /* Mobile map overlay styling */
+    .map-overlay {
+        opacity: 0.8;
+        background: rgba(0, 86, 179, 0.2);
+    }
+
+    .map-overlay:active {
+        opacity: 1;
+        background: rgba(0, 86, 179, 0.3);
+    }
+
+    .map-click-text {
+        background: rgba(0, 86, 179, 0.95);
+        padding: 15px 25px;
+        font-size: 15px;
+        border-radius: 30px;
+    }
+
+    .map-click-text i {
+        font-size: 18px;
     }
 }

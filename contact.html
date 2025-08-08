@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabinet ILGA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="contact-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+        <header>
+        <div class="container">
+            <div class="header-layout">
+                <!-- Left: OPCA Logo -->
+                <div class="header-left">
+                    <img src="logo-opca.png" alt="OPCA - Organisation Professionnelle des Comptables Agréés">
+                </div>
+                
+                <!-- Center: Main Content -->
+                <div class="header-center">
+                    <img src="Cabinet comptable Agréé.png" alt="Cabinet comptable Agréé">
+                    <div class="arabic-services">
+                        اعمال المحاسبة،الاستشارة القانونية، و الجبائية، انشاء الشركات،المنازعات و التحصيل، التكوين
+                    </div>
+                </div>
+                
+                <!-- Right: ILGA Logo -->
+                <div class="header-right">
+                    <img src="logo-ilga.png" alt="Cabinet ILGA Logo">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact Info Band -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>résidence jnane errahma gh 3, imm 1, appt 3, ahl loghlam, bernoussi - Casablanca</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-phone"></i>
+                <span>05.22.07.17.17 / 06.62.03.99.00</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:marocilga@gmail.com">marocilga@gmail.com</a>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section -->
+    <section id="contact" class="section-alt">
+        <div class="container">
+                <div class="contact-form">
+                    <h3>Demande de contact</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="nom">Nom complet</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Téléphone</label>
+                            <input type="tel" id="telephone" name="telephone">
+                        </div>
+                        <div class="form-group">
+                            <label for="sujet">Sujet</label>
+                            <input type="text" id="sujet" name="sujet" required>
+                        </div>
+                        <div class="form-group textarea-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Décrivez votre demande..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+
+
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init({
+                publicKey: "z2fMahj9M6XxdrdOu"
+            });
+        })();
+
+        // Enhanced form validation and functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    nom: document.getElementById('nom').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    telephone: document.getElementById('telephone').value.trim(),
+                    sujet: document.getElementById('sujet').value.trim(),
+                    message: document.getElementById('message').value.trim()
+                };
+                
+                // Validate required fields
+                if (!formData.nom || !formData.email || !formData.sujet || !formData.message) {
+                    alert('Veuillez remplir tous les champs obligatoires.');
+                    return;
+                }
+                
+                // Validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(formData.email)) {
+                    alert('Veuillez entrer une adresse email valide.');
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = form.querySelector('.btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Envoi en cours...';
+                submitBtn.disabled = true;
+                
+                // Send email using EmailJS
+                const templateParams = {
+                    from_name: formData.nom,
+                    from_email: formData.email,
+                    phone: formData.telephone,
+                    subject: formData.sujet,
+                    message: formData.message,
+                    to_email: 'elkasmihamza44@gmail.com'
+                };
+                
+                console.log('Attempting to send email with params:', templateParams);
+                
+                emailjs.send("service_ifli24q","template_7xxazci", templateParams)
+                    .then(function(response) {
+                        console.log('EMAIL SENT SUCCESSFULLY!', response.status, response.text);
+                        
+                        // Show success modal
+                        showSuccessModal();
+                        
+                        // Reset form
+                        form.reset();
+                        
+                    }, function(error) {
+                        console.error('EMAIL SEND FAILED:', error);
+                        
+                        // Show fallback modal with copy option
+                        showFallbackModal(formData);
+                    })
+                    .finally(function() {
+                        // Reset button
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    });
+            });
+            
+            function showSuccessModal() {
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.8); z-index: 1000; display: flex;
+                    justify-content: center; align-items: center;
+                `;
+                
+                const modalContent = document.createElement('div');
+                modalContent.style.cssText = `
+                    background: white; padding: 3rem; border-radius: 10px;
+                    max-width: 400px; width: 90%; text-align: center;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                `;
+                
+                modalContent.innerHTML = `
+                    <div style="color: #27ae60; font-size: 4rem; margin-bottom: 1rem;">✅</div>
+                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">Message envoyé avec succès!</h3>
+                    <p style="color: #7f8c8d; margin-bottom: 2rem;">
+                        Votre demande a été envoyée à Cabinet ILGA. 
+                        Nous vous contacterons dans les plus brefs délais.
+                    </p>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        background: #27ae60; color: white; padding: 1rem 2rem;
+                        border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;
+                    ">Parfait!</button>
+                `;
+                
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+                
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    if (document.body.contains(modal)) {
+                        document.body.removeChild(modal);
+                    }
+                }, 5000);
+            }
+            
+            function showFallbackModal(formData) {
+                const emailContent = 
+                    `À: elkasmihamza44@gmail.com\n` +
+                    `Sujet: Contact Cabinet ILGA - ${formData.sujet}\n\n` +
+                    `Nom: ${formData.nom}\n` +
+                    `Email: ${formData.email}\n` +
+                    `Téléphone: ${formData.telephone}\n\n` +
+                    `Message:\n${formData.message}`;
+                
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.8); z-index: 1000; display: flex;
+                    justify-content: center; align-items: center;
+                `;
+                
+                const modalContent = document.createElement('div');
+                modalContent.style.cssText = `
+                    background: white; padding: 2rem; border-radius: 10px;
+                    max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                `;
+                
+                modalContent.innerHTML = `
+                    <h3 style="color: #e74c3c; margin-bottom: 1rem; text-align: center;">
+                        ⚠️ Problème d'envoi
+                    </h3>
+                    <p style="margin-bottom: 1rem; text-align: center; color: #7f8c8d;">
+                        L'envoi automatique a échoué. Copiez ces informations et envoyez-les manuellement:
+                    </p>
+                    <textarea readonly style="
+                        width: 100%; height: 200px; padding: 1rem; border: 1px solid #ddd;
+                        border-radius: 5px; font-family: monospace; font-size: 0.9rem;
+                        background: #f8f9fa; resize: none;
+                    ">${emailContent}</textarea>
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <button id="copyBtn" style="
+                            background: #3498db; color: white; padding: 0.8rem 1.5rem;
+                            border: none; border-radius: 5px; cursor: pointer; margin-right: 1rem;
+                            font-size: 1rem;
+                        ">📋 Copier</button>
+                        <button id="closeBtn" style="
+                            background: #95a5a6; color: white; padding: 0.8rem 1.5rem;
+                            border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;
+                        ">Fermer</button>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.8rem; color: #7f8c8d; text-align: center;">
+                        💡 Après avoir copié, ouvrez votre client email et collez ces informations
+                    </p>
+                `;
+                
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+                
+                // Copy button functionality
+                const copyBtn = modalContent.querySelector('#copyBtn');
+                const textarea = modalContent.querySelector('textarea');
+                
+                copyBtn.addEventListener('click', () => {
+                    textarea.select();
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(emailContent).then(() => {
+                            copyBtn.innerHTML = '✅ Copié!';
+                            copyBtn.style.background = '#27ae60';
+                            setTimeout(() => {
+                                copyBtn.innerHTML = '📋 Copier';
+                                copyBtn.style.background = '#3498db';
+                            }, 2000);
+                        });
+                    } else {
+                        document.execCommand('copy');
+                        copyBtn.innerHTML = '✅ Copié!';
+                        copyBtn.style.background = '#27ae60';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '📋 Copier';
+                            copyBtn.style.background = '#3498db';
+                        }, 2000);
+                    }
+                });
+                
+                // Close button functionality
+                const closeBtn = modalContent.querySelector('#closeBtn');
+                closeBtn.addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                });
+                
+                // Close on outside click
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        document.body.removeChild(modal);
+                    }
+                });
+            }
+
+            // Add real-time validation
+            const emailInput = document.getElementById('email');
+            emailInput.addEventListener('blur', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (this.value && !emailRegex.test(this.value)) {
+                    this.style.borderColor = '#e74c3c';
+                    this.style.backgroundColor = '#fdf2f2';
+                } else {
+                    this.style.borderColor = '#ddd';
+                    this.style.backgroundColor = 'white';
+                }
+            });
+            
+            // Add character counter for message
+            const messageTextarea = document.getElementById('message');
+            const charCounter = document.createElement('div');
+            charCounter.style.textAlign = 'right';
+            charCounter.style.fontSize = '0.8rem';
+            charCounter.style.color = '#7f8c8d';
+            charCounter.style.marginTop = '0.5rem';
+            messageTextarea.parentNode.appendChild(charCounter);
+            
+            messageTextarea.addEventListener('input', function() {
+                const length = this.value.length;
+                charCounter.textContent = `${length}/500 caractères`;
+                if (length > 500) {
+                    this.style.borderColor = '#e74c3c';
+                    charCounter.style.color = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#ddd';
+                    charCounter.style.color = '#7f8c8d';
+                }
+            });
+
+            // Add active state to navigation
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.style.background = '');
+                    this.style.background = '#3498db';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

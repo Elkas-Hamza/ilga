@@ -1,48 +1,313 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cabinet Comptable ILGA - Expert-comptable à votre service</title>
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <title>Cabinet ILGA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
+        body {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
         }
 
         .container {
-            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
-            padding: 0 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
         }
 
-        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0056b3;
+        }
+
+        .header .logo-pca {
+            width: 100px;
+        }
+
+        .header .logo-ilga {
+            width: 80px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0056b3;
+            margin: 0;
+        }
+
+        .header .title-ar {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .header .title-fr {
+            font-size: 20px;
+            color: #000;
+            font-weight: 400;
+        }
+
+        .image-section {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: #0056b3;
+            color: #fff;
+            padding: 20px 30px;
+            font-size: 18px;
+            clip-path: polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%);
+        }
+
+        .overlay-text h2 {
+            font-size: 24px;
+            margin: 0 0 5px 0;
+            font-weight: 700;
+        }
+
+        .overlay-text p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .service-item {
+            background-color: #0056b3;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 80px;
+        }
+
+        .service-item p {
+            margin: 3px 0;
+        }
+
+        /* Main content layout */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            align-items: flex-start;
+        }
+
+        .services-section {
+            flex: 2;
+        }
+
+        .name-section {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background-color: rgba(248, 249, 250, 0.95);
+            padding: 20px 25px;
+            border-radius: 0 10px 10px 0;
+            text-align: center;
+            border: 2px solid #0056b3;
+            border-left: none;
+            max-width: 300px;
+            backdrop-filter: blur(5px);
+        }
+
+        .name-section h2 {
+            font-size: 28px;
+            color: #0056b3;
+            margin: 0 0 15px 0;
+            font-weight: 700;
+        }
+
+        .name-section .title-fr {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .name-section .title-ar {
+            font-size: 20px;
+            color: #0056b3;
+            margin: 10px 0;
+            font-weight: 700;
+            direction: rtl;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .name-section {
+                position: static;
+                transform: none;
+                max-width: none;
+                margin-top: 15px;
+                border-radius: 10px;
+                border: 2px solid #0056b3;
+                background-color: #f8f9fa;
+            }
+
+            .image-section {
+                height: 200px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 0 1rem;
+            }
+
+            .footer-item {
+                justify-content: center;
+                font-size: 13px;
+            }
+
+            .footer-item i {
+                font-size: 14px;
+            }
+
+            .location-section {
+                margin-top: 20px;
+                padding: 15px;
+            }
+
+            .location-section h3 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            margin: 0;
+            padding: 0.8rem 0;
+            border-bottom: 3px solid #3498db;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .footer-item i {
+            font-size: 15px;
+            color: #3498db;
+            min-width: 18px;
+        }
+
+        .footer-item span {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .footer-item a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-item a:hover {
+            color: #5dade2;
+            text-decoration: underline;
+        }
+
+        .location-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #0056b3;
+        }
+
+        .location-section h3 {
+            text-align: center;
+            color: #0056b3;
+            margin: 0 0 20px 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .map-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+         /* Header */
         header {
             background: #faf8f5;
             color: #2c3e50;
-            padding: 2rem 0;
             border-bottom: 3px solid #3498db;
+            padding: 1rem 0;
         }
 
         .logo {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             color: #2c3e50;
         }
 
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.8;
             color: #34495e;
         }
@@ -50,10 +315,11 @@
         .header-layout {
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .header-left, .header-right {
@@ -67,10 +333,10 @@
         }
 
         .arabic-services {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: #27ae60;
-            margin-top: 1rem;
-            line-height: 1.6;
+            margin-top: 0.8rem;
+            line-height: 1.5;
             direction: rtl;
             text-align: center;
             font-weight: 500;
@@ -82,288 +348,29 @@
                 gap: 1.5rem;
                 text-align: center;
             }
-        }
-
-        /* Navigation */
-        nav {
-            background: #34495e;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        nav li {
-            margin: 0 1rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        nav a:hover {
-            background: #3498db;
-        }
-
-        /* Sections */
-        section {
-            padding: 4rem 0;
-        }
-
-        .section-alt {
-            background: white;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
-            color: #2c3e50;
-        }
-
-        h3 {
-            color: #3498db;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-        }
-
-        .about-image {
-            text-align: center;
-        }
-
-        .about-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* Photo placeholder styles */
-        .photo-container {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .photo-placeholder {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3498db, #2c3e50);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
-            border: 4px solid #fff;
-        }
-
-        .photo-placeholder i {
-            font-size: 4rem;
-            color: #fff;
-        }
-
-        .name-title {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .professional-title {
-            font-size: 1.1rem;
-            color: #3498db;
-            font-style: italic;
-        }
-
-        /* Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            color: #3498db;
-            margin-bottom: 1rem;
-        }
-
-        /* Contact */
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 5px;
-        }
-
-        .contact-item i {
-            color: #3498db;
-            margin-right: 1rem;
-            font-size: 1.2rem;
-            width: 20px;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .btn {
-            background: #3498db;
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background: #2980b9;
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            
+            .arabic-services {
+                font-size: 1.1rem;
+                margin-top: 0.8rem;
+                padding: 0 1rem;
+                line-height: 1.5;
             }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav li {
-                margin: 0.5rem 0;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .logo {
-                font-size: 2rem;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Highlight box */
-        .highlight-box {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            margin: 2rem 0;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
+        <header>
         <div class="container">
             <div class="header-layout">
                 <!-- Left: OPCA Logo -->
                 <div class="header-left">
-                    <img src="logo-opca.png" alt="OPCA - Organisation Professionnelle des Comptables Agréés" style="max-width: 280px; max-height: 200px; object-fit: contain;">
+                    <img src="logo-opca.png" alt="OPCA - Organisation Professionnelle des Comptables Agréés" style="max-width: 260px; max-height: 220px; object-fit: contain;">
                 </div>
                 
                 <!-- Center: Main Content -->
                 <div class="header-center">
-                    <img src="Cabinet comptable Agréé.png" alt="Cabinet comptable Agréé" style="max-width: 500px; max-height: 160px; object-fit: contain; margin-bottom: 1rem;">
+                    <img src="Cabinet comptable Agréé.png" alt="Cabinet comptable Agréé" style="max-width: 350px; max-height: 100px; object-fit: contain; margin-bottom: 0.8rem;">
                     <div class="arabic-services">
                         اعمال المحاسبة،الاستشارة القانونية، و الجبائية، انشاء الشركات،المنازعات و التحصيل، التكوين
                     </div>
@@ -371,187 +378,75 @@
                 
                 <!-- Right: ILGA Logo -->
                 <div class="header-right">
-                    <img src="logo-ilga.png" alt="Cabinet ILGA Logo" style="max-width: 250px; max-height: 200px; object-fit: contain;">
+                    <img src="logo-ilga.png" alt="Cabinet ILGA Logo" style="max-width: 230px; max-height: 200px; object-fit: contain;">
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#apropos">À propos</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <!-- Contact Info Band -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>résidence jnane errahma gh 3, imm 1, appt 3, ahl loghlam, bernoussi - Casablanca</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-phone"></i>
+                <span>05.22.07.17.17 / 06.62.03.99.00</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:marocilga@gmail.com">marocilga@gmail.com</a>
+            </div>
         </div>
-    </nav>
+    </div>
 
-    <!-- About Section -->
-    <section id="apropos" class="section-alt">
-        <div class="container">
-            <h2>À propos du Cabinet ILGA</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Votre partenaire comptable de confiance</h3>
-                    <p>Depuis plus de 15 ans, le Cabinet ILGA accompagne les entreprises et les particuliers dans la gestion de leurs obligations comptables et fiscales. Notre équipe d'experts-comptables diplômés met son savoir-faire au service de votre réussite.</p>
-                    
-                    <p>Nous nous engagons à vous fournir des conseils personnalisés et des solutions adaptées à vos besoins spécifiques, que vous soyez entrepreneur, PME, ou particulier.</p>
-                    
-                    <div class="highlight-box">
-                        <h3>Notre engagement</h3>
-                        <p>Proximité • Professionnalisme • Réactivité</p>
+    <div class="container">
+        <div class="image-section">
+            <img src="bilan.png" alt="Bilan Liquidation Tribunal">
+            <div class="name-section">
+                <h2>EL KASMI Abdeljalil</h2>
+                <p class="title-fr">Comptable Professionnel Agrée Par L'etat</p>
+                <p class="title-ar">محاسب مهني معتمد من طرف الدولة</p>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="services-section">
+                <div class="services-grid">
+                    <div class="service-item">
+                        <p>تسجيل العقود</p>
+                        <p>تسجيل الصفقات العمومية</p>
                     </div>
-                </div>
-                <div class="about-image">
-                    <!-- Side by side layout for photo and OPCA -->
-                    <div style="display: flex; gap: 2rem; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;">
-                        <!-- Photo placeholder for your photo -->
-                        <div class="photo-container" style="flex: 1; min-width: 250px;">
-                            <div class="photo-placeholder">
-                                
-                            </div>
-                            <div class="name-title">EL KASMI abdeljalil</div>
-                            <div class="professional-title">Expert-Comptable Diplômé</div>
-                        </div>
-                        
-                        <!-- OPCA Section -->
-                        <div style="background: #ecf0f1; padding: 2rem; border-radius: 10px; color: #7f8c8d; flex: 1; min-width: 250px;">
-                            <div style="background: #fff; padding: 2rem; border-radius: 8px; margin-bottom: 1rem; display: flex; justify-content: center; align-items: center;">
-                                <img src="logo-opca.png" alt="OPCA - Organisation Professionnelle des Comptables Agréés" style="max-width: 200px; max-height: 100px; object-fit: contain;">
-                            </div>
-                            <div style="text-align: center;">
-                                <i style="font-size: 2rem;">📊</i>
-                                <p>Membre de l'OPCA</p>
-                            </div>
-                        </div>
+                    <div class="service-item">
+                        <p>إنشاء الشركات</p>
+                        <p>المرافقة في تأسيس السجل التجاري</p>
+                    </div>
+                    <div class="service-item">
+                        <p>مواكبة المحاسبة المالية</p>
+                        <p>المراجعة الداخلية</p>
+                    </div>
+                    <div class="service-item">
+                        <p>الاستشارات الضريبية</p>
+                        <p>الاستشارات المحاسبتية</p>
+                    </div>
+                    <div class="service-item">
+                        <p>المرافقة والمواكبة في التحصيل</p>
+                        <p>التكوين المستمر والاختياري</p>
+                    </div>
+                    <div class="service-item">
+                        <p>الاستشارات القانونية و الجبائية</p>
+                        <p>الاستشارات في تسجيل العقود</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <h2>Nos Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">📋</div>
-                    <h3>Comptabilité Générale</h3>
-                    <p>Tenue complète de votre comptabilité, établissement des comptes annuels, déclarations fiscales et sociales.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💼</div>
-                    <h3>Conseil Fiscal</h3>
-                    <p>Optimisation fiscale, accompagnement lors de contrôles, conseil en matière de TVA et impôts sur les sociétés.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📈</div>
-                    <h3>Gestion d'Entreprise</h3>
-                    <p>Analyse financière, tableaux de bord, conseil en gestion, accompagnement dans vos décisions stratégiques.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🏢</div>
-                    <h3>Création d'Entreprise</h3>
-                    <p>Accompagnement complet dans la création de votre entreprise, choix du statut juridique, formalités administratives.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💰</div>
-                    <h3>Paie et Social</h3>
-                    <p>Établissement des bulletins de paie, déclarations sociales, conseil en droit du travail et charges sociales.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
-                    <h3>Audit et Révision</h3>
-                    <p>Missions d'audit, révision comptable, expertise judiciaire, évaluation d'entreprise.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section-alt">
-        <div class="container">
-            <h2>Contactez-nous</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Informations de contact</h3>
-                    <div class="contact-item">
-                        <i>📍</i>
                         <div>
-                            <strong>Adresse :</strong><br>
-                            123 Avenue de la République<br>
-                            75011 Paris, France
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i>📞</i>
-                        <div>
-                            <strong>GSM Fixe :</strong><br>
-                            05 22 07 17 17
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i>📱</i>
-                        <div>
-                            <strong>GSM :</strong><br>
-                            06 62 03 99 00
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i>📧</i>
-                        <div>
-                            <strong>Email :</strong><br>
-                            marocilga@gmail.com
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i>🕒</i>
-                        <div>
-                            <strong>Horaires :</strong><br>
-                            Lundi - Vendredi : 9h00 - 18h00<br>
-                            Samedi : 9h00 - 12h00
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <h3>Demande de contact</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="nom">Nom complet</label>
-                            <input type="text" id="nom" name="nom" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telephone">Téléphone</label>
-                            <input type="tel" id="telephone" name="telephone">
-                        </div>
-                        <div class="form-group">
-                            <label for="sujet">Sujet</label>
-                            <input type="text" id="sujet" name="sujet" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required placeholder="Décrivez votre demande..."></textarea>
-                        </div>
-                        <button type="submit" class="btn">Envoyer le message</button>
-                    </form>
-                </div>
-            </div>
-            
-            <!-- Map Section -->
-            <div style="margin-top: 3rem;">
-                <h3 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">Notre localisation</h3>
-                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="text-align: center;  color: #2c3e50;">Notre localisation</h3>
+                <div style="background: white;  border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3756.397918408675!2d-7.488045588300658!3d33.58887217322371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cb007890addf%3A0xc9a4854f0afd8feb!2sCabinet%20ILGA!5e1!3m2!1sfr!2sma!4v1754531071861!5m2!1sfr!2sma" 
                             width="100%" 
-                            height="400" 
+                            height="300" 
                             style="border:0; border-radius: 8px; max-width: 100%;" 
                             allowfullscreen="" 
                             loading="lazy" 
@@ -560,266 +455,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Cabinet ILGA - Expert-comptable. Tous droits réservés.</p>
-            <p>Inscrit à l'Ordre des Experts-Comptables</p>
-        </div>
-    </footer>
-
-    <script>
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("z2fMahj9M6XxdrdOu"); // Replace with your actual public key from EmailJS
-        })();
-
-        // Enhanced form validation and functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form data
-                const formData = {
-                    nom: document.getElementById('nom').value.trim(),
-                    email: document.getElementById('email').value.trim(),
-                    telephone: document.getElementById('telephone').value.trim(),
-                    sujet: document.getElementById('sujet').value.trim(),
-                    message: document.getElementById('message').value.trim()
-                };
-                
-                // Validate required fields
-                if (!formData.nom || !formData.email || !formData.sujet || !formData.message) {
-                    alert('Veuillez remplir tous les champs obligatoires.');
-                    return;
-                }
-                
-                // Validate email format
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(formData.email)) {
-                    alert('Veuillez entrer une adresse email valide.');
-                    return;
-                }
-                
-                // Show loading state
-                const submitBtn = form.querySelector('.btn');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Envoi en cours...';
-                submitBtn.disabled = true;
-                
-                // Send email using EmailJS
-                const templateParams = {
-                    from_name: formData.nom,
-                    from_email: formData.email,
-                    phone: formData.telephone,
-                    subject: formData.sujet,
-                    message: formData.message,
-                    to_email: 'elkasmihamza44@gmail.com'
-                };
-                
-                emailjs.send("service_ifli24q","template_7xxazci", templateParams)
-                    .then(function(response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                        
-                        // Show success modal
-                        showSuccessModal();
-                        
-                        // Reset form
-                        form.reset();
-                        
-                    }, function(error) {
-                        console.log('FAILED...', error);
-                        
-                        // Show fallback modal with copy option
-                        showFallbackModal(formData);
-                    })
-                    .finally(function() {
-                        // Reset button
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                    });
-            });
-            
-            function showSuccessModal() {
-                const modal = document.createElement('div');
-                modal.style.cssText = `
-                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                    background: rgba(0,0,0,0.8); z-index: 1000; display: flex;
-                    justify-content: center; align-items: center;
-                `;
-                
-                const modalContent = document.createElement('div');
-                modalContent.style.cssText = `
-                    background: white; padding: 3rem; border-radius: 10px;
-                    max-width: 400px; width: 90%; text-align: center;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                `;
-                
-                modalContent.innerHTML = `
-                    <div style="color: #27ae60; font-size: 4rem; margin-bottom: 1rem;">✅</div>
-                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">Message envoyé avec succès!</h3>
-                    <p style="color: #7f8c8d; margin-bottom: 2rem;">
-                        Votre demande a été envoyée à Cabinet ILGA. 
-                        Nous vous contacterons dans les plus brefs délais.
-                    </p>
-                    <button onclick="this.parentElement.parentElement.remove()" style="
-                        background: #27ae60; color: white; padding: 1rem 2rem;
-                        border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;
-                    ">Parfait!</button>
-                `;
-                
-                modal.appendChild(modalContent);
-                document.body.appendChild(modal);
-                
-                // Auto close after 5 seconds
-                setTimeout(() => {
-                    if (document.body.contains(modal)) {
-                        document.body.removeChild(modal);
-                    }
-                }, 5000);
-            }
-            
-            function showFallbackModal(formData) {
-                const emailContent = 
-                    `À: elkasmihamza44@gmail.com\n` +
-                    `Sujet: Contact Cabinet ILGA - ${formData.sujet}\n\n` +
-                    `Nom: ${formData.nom}\n` +
-                    `Email: ${formData.email}\n` +
-                    `Téléphone: ${formData.telephone}\n\n` +
-                    `Message:\n${formData.message}`;
-                
-                const modal = document.createElement('div');
-                modal.style.cssText = `
-                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                    background: rgba(0,0,0,0.8); z-index: 1000; display: flex;
-                    justify-content: center; align-items: center;
-                `;
-                
-                const modalContent = document.createElement('div');
-                modalContent.style.cssText = `
-                    background: white; padding: 2rem; border-radius: 10px;
-                    max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                `;
-                
-                modalContent.innerHTML = `
-                    <h3 style="color: #e74c3c; margin-bottom: 1rem; text-align: center;">
-                        ⚠️ Problème d'envoi
-                    </h3>
-                    <p style="margin-bottom: 1rem; text-align: center; color: #7f8c8d;">
-                        L'envoi automatique a échoué. Copiez ces informations et envoyez-les manuellement:
-                    </p>
-                    <textarea readonly style="
-                        width: 100%; height: 200px; padding: 1rem; border: 1px solid #ddd;
-                        border-radius: 5px; font-family: monospace; font-size: 0.9rem;
-                        background: #f8f9fa; resize: none;
-                    ">${emailContent}</textarea>
-                    <div style="margin-top: 1rem; text-align: center;">
-                        <button id="copyBtn" style="
-                            background: #3498db; color: white; padding: 0.8rem 1.5rem;
-                            border: none; border-radius: 5px; cursor: pointer; margin-right: 1rem;
-                            font-size: 1rem;
-                        ">📋 Copier</button>
-                        <button id="closeBtn" style="
-                            background: #95a5a6; color: white; padding: 0.8rem 1.5rem;
-                            border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;
-                        ">Fermer</button>
-                    </div>
-                    <p style="margin-top: 1rem; font-size: 0.8rem; color: #7f8c8d; text-align: center;">
-                        💡 Après avoir copié, ouvrez votre client email et collez ces informations
-                    </p>
-                `;
-                
-                modal.appendChild(modalContent);
-                document.body.appendChild(modal);
-                
-                // Copy button functionality
-                const copyBtn = modalContent.querySelector('#copyBtn');
-                const textarea = modalContent.querySelector('textarea');
-                
-                copyBtn.addEventListener('click', () => {
-                    textarea.select();
-                    if (navigator.clipboard) {
-                        navigator.clipboard.writeText(emailContent).then(() => {
-                            copyBtn.innerHTML = '✅ Copié!';
-                            copyBtn.style.background = '#27ae60';
-                            setTimeout(() => {
-                                copyBtn.innerHTML = '📋 Copier';
-                                copyBtn.style.background = '#3498db';
-                            }, 2000);
-                        });
-                    } else {
-                        document.execCommand('copy');
-                        copyBtn.innerHTML = '✅ Copié!';
-                        copyBtn.style.background = '#27ae60';
-                        setTimeout(() => {
-                            copyBtn.innerHTML = '📋 Copier';
-                            copyBtn.style.background = '#3498db';
-                        }, 2000);
-                    }
-                });
-                
-                // Close button functionality
-                const closeBtn = modalContent.querySelector('#closeBtn');
-                closeBtn.addEventListener('click', () => {
-                    document.body.removeChild(modal);
-                });
-                
-                // Close on outside click
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        document.body.removeChild(modal);
-                    }
-                });
-            }
-
-            // Add real-time validation
-            const emailInput = document.getElementById('email');
-            emailInput.addEventListener('blur', function() {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (this.value && !emailRegex.test(this.value)) {
-                    this.style.borderColor = '#e74c3c';
-                    this.style.backgroundColor = '#fdf2f2';
-                } else {
-                    this.style.borderColor = '#ddd';
-                    this.style.backgroundColor = 'white';
-                }
-            });
-            
-            // Add character counter for message
-            const messageTextarea = document.getElementById('message');
-            const charCounter = document.createElement('div');
-            charCounter.style.textAlign = 'right';
-            charCounter.style.fontSize = '0.8rem';
-            charCounter.style.color = '#7f8c8d';
-            charCounter.style.marginTop = '0.5rem';
-            messageTextarea.parentNode.appendChild(charCounter);
-            
-            messageTextarea.addEventListener('input', function() {
-                const length = this.value.length;
-                charCounter.textContent = `${length}/500 caractères`;
-                if (length > 500) {
-                    this.style.borderColor = '#e74c3c';
-                    charCounter.style.color = '#e74c3c';
-                } else {
-                    this.style.borderColor = '#ddd';
-                    charCounter.style.color = '#7f8c8d';
-                }
-            });
-
-            // Add active state to navigation
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.forEach(l => l.style.background = '');
-                    this.style.background = '#3498db';
-                });
-            });
-        });
-    </script>
+    </div>
 </body>
 </html>

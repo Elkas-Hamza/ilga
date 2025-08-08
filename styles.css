@@ -399,12 +399,26 @@ header {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.map-wrapper:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.map-wrapper a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 
 .map-iframe {
     border: 0;
     border-radius: 8px;
     max-width: 100%;
+    pointer-events: none;
 }
 
 @media (max-width: 768px) {
